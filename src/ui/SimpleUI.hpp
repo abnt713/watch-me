@@ -20,6 +20,7 @@ class SimpleUI : public Loadable {
 		lv_obj_t *bg;
 		lv_obj_t *btn;
 		lv_obj_t *currTime;
+		lv_obj_t *currDate;
 		lv_obj_t *txtFlash;
 		lv_obj_t *battLabel;
 		lv_event_cb_t cb;

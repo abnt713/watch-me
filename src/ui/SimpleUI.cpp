@@ -52,6 +52,16 @@ void SimpleUI::setup() {
 	);
 	lv_obj_set_style_local_text_font(this->currTime, LV_LABEL_PART_MAIN, LV_STATE_DEFAULT, &watch_display);
 
+	this->currDate = lv_label_create(lv_scr_act(), NULL);
+	lv_obj_align(this->currDate, this->currTime, LV_ALIGN_OUT_BOTTOM_MID, 0, 0);
+	lv_obj_set_style_local_text_color(
+		this->currDate,
+		LV_LABEL_PART_MAIN,
+		LV_STATE_DEFAULT,
+		LV_COLOR_BLACK
+	);
+	lv_obj_set_style_local_text_font(this->currDate, LV_LABEL_PART_MAIN, LV_STATE_DEFAULT, &watch_display);
+
 	this->battLabel = lv_label_create(lv_scr_act(), NULL);
 	lv_obj_set_style_local_text_color(
 		this->battLabel,
@@ -74,16 +84,15 @@ void SimpleUI::setup() {
 void SimpleUI::loop() {
 	lv_task_handler();
 
-	time_t now;
-	struct tm info;
-	char buf[64];
-
-	time(&now);
-	localtime_r(&now, &info);
-	strftime(buf, sizeof(buf), "%H:%M:%S", &info);
-	lv_label_set_text(this->currTime, buf);
+	const char *tm = this->ttgo->rtc->formatDateTime();
+	lv_label_set_text(this->currTime, tm);
 	lv_obj_align(this->currTime, NULL, LV_ALIGN_CENTER, 0, 0);
 
+	const char *dt = this->ttgo->rtc->formatDateTime(PCF_TIMEFORMAT_DD_MM_YYYY);
+	lv_label_set_text(this->currDate, dt);
+	lv_obj_align(this->currDate, this->currTime, LV_ALIGN_OUT_BOTTOM_MID, 0, 10);
+
+	char buf[64];
 	batt->battPercentage(buf, 64);
 	lv_label_set_text(this->battLabel, buf);
 	lv_obj_align(this->battLabel, NULL, LV_ALIGN_IN_TOP_RIGHT, 0, 0);
