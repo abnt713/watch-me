@@ -2,8 +2,9 @@
 #define BATTERY_H
 
 #include "config.hpp"
+#include "base/Loadable.hpp"
 
-class Battery {
+class Battery : public Setup {
 	public:
 		Battery(AXP20X_Class *power);
 		void battPercentage(char *buf, int size);

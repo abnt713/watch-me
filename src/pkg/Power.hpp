@@ -2,8 +2,9 @@
 #define POWER_HPP
 
 #include "config.hpp"
+#include "base/Loadable.hpp"
 
-class Power {
+class Power : public Loadable {
 	public:
 		Power(TTGOClass *ttgo);
 		void activateLowPower();

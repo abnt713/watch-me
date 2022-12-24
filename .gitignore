@@ -3,3 +3,9 @@
 .gcc-flags.json
 .ccls
 .ccls-cache
+
+/src/assets/ircodes/*
+/src/assets/fonts/*
+/src/assets/img/*
+
+!README.md

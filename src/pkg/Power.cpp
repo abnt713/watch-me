@@ -1,6 +1,5 @@
 #include "Power.hpp"
 #include "config.hpp"
-#include "Arduino.h"
 
 Power::Power(TTGOClass *ttgo) {
 	this->ttgo = ttgo;
